@@ -7,3 +7,4 @@ train_parties = pd.read_csv("train_parties.csv")
 #print (hi)
 
 # print(bar_locations[:5])
+#jidjf
