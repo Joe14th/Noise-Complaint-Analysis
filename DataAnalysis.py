@@ -6,3 +6,4 @@ test_parties = pd.read_csv("test_parties.csv")
 train_parties = pd.read_csv("train_parties.csv")
 
 # print(bar_locations[:5])
+#jidjf
