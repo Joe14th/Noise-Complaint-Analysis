@@ -33,7 +33,7 @@ finalDt = {'names': ('borough', 'totalPop', 'men', 'women', 'hispanic', 'white',
 
 censusFile = "nyc_census_tracts.csv"
 censusData = np.genfromtxt(censusFile, delimiter=',', dtype=censusDt, skip_header=2)
-print(censusData['poverty'][:10])
+#print(censusData['poverty'][:10])
 # Removes empty data
 mask = (np.isnan(censusData['hispanic']))
 censusData = censusData[~mask]
@@ -514,4 +514,4 @@ statenIslandComplaints = partyData[partyData['borough'] == 'STATEN ISLAND']
 # combined census data
 combinedCensusData = np.concatenate((bronxFinal, brooklynFinal, manhattanFinal, queensFinal, statenIslandFinal))
 
-print(combinedCensusData)
+#print(combinedCensusData)
