@@ -2,8 +2,8 @@ import kaggle as kg
 import numpy as np
 
 kg.api.authenticate()
-#kg.api.dataset_download_files(dataset='somesnm/partynyc', path='.', unzip=True, force=False)
-#kg.api.dataset_download_files(dataset='muonneutrino/new-york-city-census-data', path='.', unzip=True, force=False)
+kg.api.dataset_download_files(dataset='somesnm/partynyc', path='.', unzip=True, force=False)
+kg.api.dataset_download_files(dataset='muonneutrino/new-york-city-census-data', path='.', unzip=True, force=False)
 
 partyDt = {'names': ('created', 'closed', 'locType', 'zip', 'city', 'borough', 'lat', 'long'),
            'formats': ('U25', 'U25', 'U25', np.int, 'U25', 'U25', np.float, np.float)}
