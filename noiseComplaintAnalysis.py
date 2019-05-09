@@ -201,10 +201,15 @@ statenIslandTotalCit = np.sum(statenIsland['citizen'])
 
 # Avg median household income
 bronxAvgIncome = np.mean(bronx['income'])
+bronxIncome = bronx['income']
 brooklynAvgIncome = np.mean(brooklyn['income'])
+brooklynIncome = brooklyn['income']
 manhattanAvgIncome = np.mean(manhattan['income'])
+manhattanIncome = manhattan['income']
 queensAvgIncome = np.mean(queens['income'])
+queensIncome = queens['income']
 statenIslandAvgIncome = np.mean(statenIsland['income'])
+statenIslandIncome = statenIsland['income']
 
 # AvgIncomePerCap
 bronxAvgIncomePerCap = np.mean(bronx['incomePerCap'])

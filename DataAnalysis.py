@@ -133,7 +133,6 @@ publicWork = bronxPublicWork + brooklynPublicWork + manhattanPublicWork + queens
 selfEmployed = bronxSelfEmployed + brooklynSelfEmployed + manhattanSelfEmployed + queensSelfEmployed + statenIslandSelfEmployed
 familyWork = bronxFamilyWork + brooklynFamilyWork + manhattanFamilyWork + queensFamilyWork + statenIslandFamilyWork
 employ_type = [privateWork, publicWork, selfEmployed, familyWork]
-print(employ_type)
 plt.bar(np.arange(len(employ_type)), employ_type, width=0.9, align='center', color='green')
 employ_type = ['Private Work', 'Public Work', 'Self Employed', 'Family Work']
 plt.xticks(np.arange(len(employ_type)), employ_type, rotation=40, fontsize=7, )
@@ -210,8 +209,9 @@ plt.title('Population Size by Borough')
 plt.show()
 
 # Income v population per borough: box plot :Gabi
-plt.title("Income for Population")
-plt.boxplot(combinedCensusData['income'], vert=False)
+plt.title("Income Distribution Across Boroughs")
+plt.boxplot([bronxIncome,brooklynIncome,manhattanIncome,queensIncome,statenIslandIncome])
+plt.xticks([1,2,3,4,5], boroughs)
 plt.show()
 
 # Max and min of incoming calls per borough: bar chart like hw6 :Jay
