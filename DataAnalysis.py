@@ -29,7 +29,7 @@ plt.bar(np.arange(len(loc_type_counts)), loc_type_counts, width=0.9, align='cent
 plt.xticks(np.arange(len(location_types)), location_types, rotation=40, fontsize=7, )
 plt.title("Location Types")
 plt.xlabel("Locations")
-# plt.ylabel("Calls Per Location")
+plt.ylabel("Calls Per Location")
 
 # # Borough: pie chart :Chey
 plt.subplot(133)
