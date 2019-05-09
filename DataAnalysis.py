@@ -11,6 +11,7 @@ queens = partyData[partyData['borough'] == 'QUEENS']
 staten_island = partyData[partyData['borough'] == 'STATEN ISLAND']
 
 # -------------------------------- PARTY IN NYC ---------------------------------------------
+plt.subplots_adjust(wspace=0.5)
 # Calls per day: plot : Jay
 plt.subplot(131)
 dates, counts = np.unique([x.split()[0] for x in partyData['created']], return_counts=True)
@@ -52,6 +53,7 @@ plt.title("Calls Per Borough")
 plt.show()
 
 # -------------------------------- NYC CENSUS TRACT ---------------------------------------------
+plt.subplots_adjust(wspace=0.3, hspace=0.6)
 # # Men v Women: pie chart :Gabi
 plt.subplot(321)
 men_pop = (bronxMen + brooklynMen + manhattanMen + queensMen + statenIslandMen)
