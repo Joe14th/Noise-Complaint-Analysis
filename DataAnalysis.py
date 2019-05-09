@@ -1,11 +1,6 @@
-from noiseComplaintAnalysis import combinedCensusData
-from noiseComplaintAnalysis import bronxFinal
-
-from noiseComplaintAnalysis import partyData
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 
+from noiseComplaintAnalysis import *
 
 # -------------------------------- BOROUGHS -------------------------------------------------
 boroughs = ['BRONX', 'BROOKLYN', 'MANHATTAN', 'QUEENS', 'STATEN ISLAND']
@@ -28,7 +23,13 @@ months = [dates[x] for x in xticks]
 plt.xticks(xticks, months, rotation=30)
 
 # # Location types: bar chart: Gabi
-#plt.subplot(132)
+plt.subplot(132)
+location_types, loc_type_counts = np.unique([y.split()[0] for y in partyData['locType']], return_counts=True)
+plt.bar(np.arange(len(loc_type_counts)), loc_type_counts, width=0.9, align='center', color='green')
+plt.xticks(np.arange(len(location_types)), location_types, rotation=40, fontsize=7, )
+plt.title("Location Types")
+plt.xlabel("Locations")
+# plt.ylabel("Calls Per Location")
 
 # # Borough: pie chart :Chey
 plt.subplot(133)
@@ -52,7 +53,13 @@ plt.show()
 
 # -------------------------------- NYC CENSUS TRACT ---------------------------------------------
 # # Men v Women: pie chart :Gabi
-# plt.subplot(321)
+plt.subplot(321)
+men_pop = (bronxMen + brooklynMen + manhattanMen + queensMen + statenIslandMen)
+wamen_pop = (bronxWomen + brooklynWomen + manhattanWomen + queensWomen + statenIslandWomen)
+gender = [men_pop, wamen_pop]
+labels = ['Men', 'Women']
+plt.pie(gender, labels=labels, autopct='%1.1f%%')
+plt.title("Men/Women NYC Population")
 
 # # Race: bar chart :Chey
 plt.subplot(322)
@@ -96,9 +103,10 @@ xTicks = ['Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island']
 barWidth = .5
 plt.bar(xTicks, allHisp, barWidth, label='Hispanic')
 plt.bar(xTicks, allWhite, barWidth, bottom=allHisp, label='White')
-plt.bar(xTicks, allBlack, barWidth, bottom=[i+j for i, j in zip(allHisp,allWhite)], label='Black')
-plt.bar(xTicks, allNative, barWidth, bottom=[i+j+k for i, j, k in zip(allHisp, allWhite, allBlack)], label='Native')
-plt.bar(xTicks, allAsian, barWidth, bottom=[i+j+k+l for i, j, k, l in zip(allHisp, allWhite, allBlack, allNative)],
+plt.bar(xTicks, allBlack, barWidth, bottom=[i + j for i, j in zip(allHisp, allWhite)], label='Black')
+plt.bar(xTicks, allNative, barWidth, bottom=[i + j + k for i, j, k in zip(allHisp, allWhite, allBlack)], label='Native')
+plt.bar(xTicks, allAsian, barWidth,
+        bottom=[i + j + k + l for i, j, k, l in zip(allHisp, allWhite, allBlack, allNative)],
         label='Asian')
 plt.ylabel('Population-Thousands')
 plt.xlabel('Boroughs')
@@ -118,8 +126,19 @@ employed_sum = sum([sum(x) for x in employed])
 unemployment_sum = combinedCensusData['unemployment'].sum()
 plt.pie([employed_sum, unemployment_sum], labels=['employed', 'unemployed'], autopct='%1.2f%%')
 
-# # Types of Employment: bar chartx:Gabi
-# plt.subplot(325)
+# # Types of Employment: bar chart:Gabi
+plt.subplot(325)
+privateWork = bronxPrivateWork + brooklynPrivateWork + manhattanPrivateWork + queensPrivateWork + statenIslandPrivateWork
+publicWork = bronxPublicWork + brooklynPublicWork + manhattanPublicWork + queensPublicWork + statenIslandPublicWork
+selfEmployed = bronxSelfEmployed + brooklynSelfEmployed + manhattanSelfEmployed + queensSelfEmployed + statenIslandSelfEmployed
+familyWork = bronxFamilyWork + brooklynFamilyWork + manhattanFamilyWork + queensFamilyWork + statenIslandFamilyWork
+employ_type = [privateWork, publicWork, selfEmployed, familyWork]
+print(employ_type)
+plt.bar(np.arange(len(employ_type)), employ_type, width=0.9, align='center', color='green')
+employ_type = ['Private Work', 'Public Work', 'Self Employed', 'Family Work']
+plt.xticks(np.arange(len(employ_type)), employ_type, rotation=40, fontsize=7, )
+plt.title("Types of Employment")
+plt.ylabel("Population")
 
 # # Race (male & female) bar chart :Chey
 plt.subplot(326)
@@ -157,18 +176,18 @@ statenWhite = combinedCensusData[4][5]
 statenBlack = combinedCensusData[4][6]
 statenNative = combinedCensusData[4][7]
 statenAsian = combinedCensusData[4][8]
-statenWomen=[statenHisp,statenWhite,statenBlack,statenNative,statenAsian]
-
+statenWomen = [statenHisp, statenWhite, statenBlack, statenNative, statenAsian]
 
 xTicks = ['Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island']
 barWidth = .5
 plt.bar(xTicks, bronxWomen, barWidth, label='Hispanic')
 plt.bar(xTicks, brooklynWomen, barWidth, bottom=bronxWomen, label='White')
-plt.bar(xTicks, manhattanWomen, barWidth, bottom=[i+j for i, j in zip(bronxWomen,brooklynWomen)], label='Black')
-plt.bar(xTicks, queensWomen, barWidth, bottom=[i+j+k for i, j, k in zip(bronxWomen, brooklynWomen, manhattanWomen)],
+plt.bar(xTicks, manhattanWomen, barWidth, bottom=[i + j for i, j in zip(bronxWomen, brooklynWomen)], label='Black')
+plt.bar(xTicks, queensWomen, barWidth, bottom=[i + j + k for i, j, k in zip(bronxWomen, brooklynWomen, manhattanWomen)],
         label='Native')
-plt.bar(xTicks, statenWomen, barWidth, bottom=[i+j+k+l for i, j, k, l in zip(bronxWomen, brooklynWomen, manhattanWomen,
-                                                                             queensWomen)],label='Asian')
+plt.bar(xTicks, statenWomen, barWidth,
+        bottom=[i + j + k + l for i, j, k, l in zip(bronxWomen, brooklynWomen, manhattanWomen,
+                                                    queensWomen)], label='Asian')
 
 plt.ylabel('Population-Thousands')
 plt.xlabel('Boroughs')
@@ -178,21 +197,22 @@ plt.show()
 
 # -------------------------------- BOTH ---------------------------------------------
 # Population of borough: plot :Chey
-
 bronxPop = combinedCensusData[0][1]
 brookPop = combinedCensusData[1][1]
 manPop = combinedCensusData[2][1]
 queensPop = combinedCensusData[3][1]
 statenPop = combinedCensusData[4][1]
 popsBorough = [bronxPop, brookPop, manPop, queensPop, statenPop]
-yCoord= ['Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island']
+yCoord = ['Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island']
 plt.barh(yCoord, popsBorough)
 plt.xlabel('Population Size')
 plt.title('Population Size by Borough')
 plt.show()
 
-
 # Income v population per borough: box plot :Gabi
+plt.title("Income for Population")
+plt.boxplot(combinedCensusData['income'], vert=False)
+plt.show()
 
 # Max and min of incoming calls per borough: bar chart like hw6 :Jay
 min = []
@@ -221,15 +241,14 @@ plt.xlabel('Boroughs')
 plt.ylabel('Number of calls')
 plt.show()
 
-
 # Poverty and call correlation: scatter plot:Jay
 poverty = combinedCensusData['poverty']
 plt.title("Number of Calls and Poverty Levels")
-plt.scatter(counts1, len(counts1)*[poverty[0]], label='Bronx')
-plt.scatter(counts2, len(counts2)*[poverty[1]], label='Brooklyn')
-plt.scatter(counts3, len(counts3)*[poverty[2]], label='Manhattan')
-plt.scatter(counts4, len(counts4)*[poverty[3]], label='Queens')
-plt.scatter(counts5, len(counts5)*[poverty[4]], label='Staten Island')
+plt.scatter(counts1, len(counts1) * [poverty[0]], label='Bronx')
+plt.scatter(counts2, len(counts2) * [poverty[1]], label='Brooklyn')
+plt.scatter(counts3, len(counts3) * [poverty[2]], label='Manhattan')
+plt.scatter(counts4, len(counts4) * [poverty[3]], label='Queens')
+plt.scatter(counts5, len(counts5) * [poverty[4]], label='Staten Island')
 plt.legend(title='Boroughs')
 plt.xlabel("Number of Calls")
 plt.ylabel("Poverty Levels")
@@ -237,4 +256,3 @@ plt.show()
 
 # print(combinedCensusData[''])
 # Heat map??
-
