@@ -112,7 +112,7 @@ plt.bar(xTicks, allAsian, barWidth,
         label='Asian')
 plt.ylabel('Population-Thousands')
 plt.xlabel('Boroughs')
-plt.legend(loc=0)
+plt.legend(loc=0, bbox_to_anchor=(1, 1.1))
 plt.title('Calls by Race')
 
 # Income: box plot:Jay
@@ -192,7 +192,7 @@ plt.bar(xTicks, statenWomen, barWidth,
 
 plt.ylabel('Population-Thousands')
 plt.xlabel('Boroughs')
-plt.legend(loc=0)
+plt.legend(loc=0, bbox_to_anchor=(1, 1.1))
 
 plt.show()
 
